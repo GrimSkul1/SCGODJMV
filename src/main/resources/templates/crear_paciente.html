@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Manejo Pacientes</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Manejo Pacientes</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/pacientes}">Lista de Pacientes</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<div class = "container">
+    <div class = "row">
+        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class = "text-center"> Ingresar Nuevo Paciente </h1>
+            <div class = "card-body">
+                <form th:action="@{/pacientes}" th:object = "${paciente}" method="POST">
+                    <div class ="form-group">
+                        <label> Nombre </label>
+                        <input
+                                type = "text"
+                                name = "nombre"
+                                th:field = "*{nombre}"
+                                class = "form-control"
+                                placeholder="Introduzca Nombre de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Apellido </label>
+                        <input
+                                type = "text"
+                                name = "apellido"
+                                th:field = "*{apellido}"
+                                class = "form-control"
+                                placeholder="Introduzca apellido de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Correo </label>
+                        <input
+                                type = "text"
+                                name = "email"
+                                th:field = "*{email}"
+                                class = "form-control"
+                                placeholder="Introduzca Correo de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Numero </label>
+                        <input
+                                type = "text"
+                                name = "numero"
+                                th:field = "*{numero}"
+                                class = "form-control"
+                                placeholder="Introduzca el Numero telefonico de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Direccion </label>
+                        <input
+                                type = "text"
+                                name = "direccion"
+                                th:field = "*{direccion}"
+                                class = "form-control"
+                                placeholder="Introduzca direccion de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Identificacion </label>
+                        <input
+                                type = "text"
+                                name = "identificacion"
+                                th:field = "*{identificacion}"
+                                class = "form-control"
+                                placeholder="Introduzca la identificacion de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Seguro </label>
+                        <input
+                                type = "text"
+                                name = "seguro"
+                                th:field = "*{seguro}"
+                                class = "form-control"
+                                placeholder="Introduzca el seguro de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Fecha Nacimiento </label>
+                        <input
+                                type = "text"
+                                name = "fechaNacimiento"
+                                th:field = "*{fechaNacimiento}"
+                                class = "form-control"
+                                placeholder="Introduzca la Fecha de Nacimiento de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Nombre Contacto </label>
+                        <input
+                                type = "text"
+                                name = "nombreContacto"
+                                th:field = "*{nombreContacto}"
+                                class = "form-control"
+                                placeholder="Introduzca el contacto de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Numero Contacto </label>
+                        <input
+                                type = "text"
+                                name = "numeroContacto"
+                                th:field = "*{numeroContacto}"
+                                class = "form-control"
+                                placeholder="Introduzca numero de el contacto"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Estado Civil </label>
+                        <input
+                                type = "text"
+                                name = "estadoCivil"
+                                th:field = "*{estadoCivil}"
+                                class = "form-control"
+                                placeholder="Introduzca el estado civil de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Profesion </label>
+                        <input
+                                type = "text"
+                                name = "profesion"
+                                th:field = "*{profesion}"
+                                class = "form-control"
+                                placeholder="Introduzca la profesion de Paciente"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label> Nacionalidad </label>
+                        <input
+                                type = "text"
+                                name = "nacionalidad"
+                                th:field = "*{nacionalidad}"
+                                class = "form-control"
+                                placeholder="Introduzca la nacionalidad de Paciente"
+                        />
+                    </div>
+
+                    <div class = "box-footer">
+                        <button type="submit" class = "btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
