@@ -1,5 +1,8 @@
 package net.javaguides.springboot;
 
+import net.javaguides.springboot.entity.Paciente;
+import net.javaguides.springboot.repository.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,4 +13,6 @@ public class RegistrationLoginSpringBootSecurityThymeleafApplication {
 		SpringApplication.run(RegistrationLoginSpringBootSecurityThymeleafApplication.class, args);
 	}
 
+	@Autowired
+	private PacienteRepository pacienteRepository;
 }
