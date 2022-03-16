@@ -39,19 +39,21 @@ public class AppRegistrationController {
         return "redirect:/citas";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/citas/edit/{id}")
     public String editAppointmentForm(@PathVariable Long id, Model model) {
         model.addAttribute("cita", appointmentService.getAppointmentById(id));
         return "edit_appointment";
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/citas/{id}")
     public String updateAppointment(@PathVariable Long id,
                                     @ModelAttribute("cita") Appointment appointment,
                                     Model model) {
 
-        // get student from database by id
+        // get appointment from database by id
         Appointment existingAppointment = appointmentService.getAppointmentById(id);
+        existingAppointment.setDoctorID(appointment.getDoctorID());
+        existingAppointment.setPacientID(appointment.getPacientID());
         existingAppointment.setDate(appointment.getDate());
         existingAppointment.setTime(appointment.getTime());
         existingAppointment.setDescription(appointment.getDescription());
@@ -63,7 +65,7 @@ public class AppRegistrationController {
 
     // handler method to handle delete student request
 
-    @GetMapping("/{id}")
+    @GetMapping("/citas/{id}")
     public String deleteAppointment(@PathVariable Long id) {
         appointmentService.deleteAppointmentById(id);
         return "redirect:/citas";
