@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Consultorio Ginecologico Dr.Jorge Vargas</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <!-- Brand -->
+    <header class="navbar-brand" >Consultorio Ginecologico Dr.Jorge Vargas</header>
+
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}"></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li th:classappend="${module == 'pacientes' ? 'active' : ''}">
+                    <a href="#" th:href="@{/paciente}">Pacientes</a>
+                </li>
+                <li th:classappend="${module == 'citas' ? 'active' : ''}">
+                    <a href="#" th:href="@{/citas}">Citas</a>
+                </li>
+                <li th:classappend="${module == 'consultas' ? 'active' : ''}">
+                    <a href="#" th:href="@{/task}">Consultas</a>
+                </li>
+                <li th:classappend="${module == 'procedimiento' ? 'active' : ''}">
+                    <a href="#" th:href="@{/task}">Procedimientos</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+<div class="card">
+    <div class="card-body">
+        <div class = "container">
+            <div class = "row">
+                <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                    <h1 class = "text-center"> Hacer Nueva Cita </h1>
+                    <div class = "card-body">
+                        <form th:action="@{/citas/{id} (id=${cita.id})}" th:object = "${cita}" method="POST">
+                            <div class ="form-group">
+                                <label> Paciente </label>
+                                <input
+                                        type = "number"
+                                        name = "patient"
+                                        th:field = "*{pacientID}"
+                                        class = "form-control"
+                                        placeholder="Introduzca el CODIGO del Paciente"
+                                />
+                            </div>
+
+                            <div class ="form-group">
+                                <label> Doctor </label>
+                                <input
+                                        type = "number"
+                                        name = "doctor"
+                                        th:field = "*{doctorID}"
+                                        class = "form-control"
+                                        placeholder="Introduzca el CODIGO del Doctor"
+                                />
+                            </div>
+
+                            <div class ="form-group">
+                                <label> Description </label>
+                                <textarea
+                                        name = "description"
+                                        th:field = "*{description}"
+                                        class = "form-control"
+                                        placeholder="Introduzca la razon de la cita"
+                                ></textarea>
+                            </div>
+
+                            <div class ="form-group">
+                                <label> Fecha </label>
+                                <input
+                                        type = "date"
+                                        name = "date"
+                                        th:field = "*{date}"
+                                        class = "form-control"
+                                />
+                            </div>
+
+                            <div class ="form-group">
+                                <label> Hora </label>
+                                <input
+                                        type = "time"
+                                        name = "time"
+                                        th:field = "*{time}"
+                                        class = "form-control"
+                                />
+                            </div>
+
+                            <div class = "box-footer">
+                                <button type="submit" class = "btn btn-primary">
+                                    Editar
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
