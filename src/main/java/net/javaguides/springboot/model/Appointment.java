@@ -28,16 +28,16 @@ public class Appointment {
     private LocalTime time;
 
     @Column(name = "doctor")
-    private String doctorID;
+    private long doctorID;
 
     @Column(name = "pacient")
-    private String pacientID;
+    private long pacientID;
 
     public Appointment() {
 
     }
 
-    public Appointment(String description, LocalDate date, LocalTime time, String doctorID, String pacientID) {
+    public Appointment(String description, LocalDate date, LocalTime time, long doctorID, long pacientID) {
         this.description = description;
         this.date = date;
         this.time = time;
@@ -73,19 +73,19 @@ public class Appointment {
         this.time = time;
     }
 
-    public String getDoctorID() {
+    public long getDoctorID() {
         return doctorID;
     }
 
-    public void setDoctorID(String doctorID) {
+    public void setDoctorID(long doctorID) {
         this.doctorID = doctorID;
     }
 
-    public String getPacientID() {
+    public long getPacientID() {
         return pacientID;
     }
 
-    public void setPacientID(String pacientID) {
+    public void setPacientID(long pacientID) {
         this.pacientID = pacientID;
     }
 }

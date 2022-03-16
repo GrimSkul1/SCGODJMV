@@ -7,10 +7,10 @@ public class AppRegistrationDto {
     private String description;
     private LocalDate date;
     private LocalTime time;
-    private String doctorID;
-    private String pacientID;
+    private long doctorID;
+    private long pacientID;
 
-    public AppRegistrationDto(String description, LocalDate date, LocalTime time, String doctorID, String pacientID) {
+    public AppRegistrationDto(String description, LocalDate date, LocalTime time, long doctorID, long pacientID) {
         this.description = description;
         this.date = date;
         this.time = time;
@@ -30,11 +30,11 @@ public class AppRegistrationDto {
         return time;
     }
 
-    public String getDoctorID() {
+    public long getDoctorID() {
         return doctorID;
     }
 
-    public String getPacientID() {
+    public long getPacientID() {
         return pacientID;
     }
 }

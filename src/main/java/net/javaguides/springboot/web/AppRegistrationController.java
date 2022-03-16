@@ -34,7 +34,7 @@ public class AppRegistrationController {
     }
 
     @PostMapping("/citas")
-    public String saveAppointment(@ModelAttribute("student") Appointment appointment) {
+    public String saveAppointment(@ModelAttribute("citas") Appointment appointment) {
         appointmentService.saveAppointment(appointment);
         return "redirect:/citas";
     }
