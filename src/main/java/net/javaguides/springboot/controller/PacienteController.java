@@ -20,14 +20,14 @@ public class PacienteController {
         this.pacienteService = pacienteService;
     }
 
-    @GetMapping("/pacientes")
+    @GetMapping("/paciente")
     public String listPacientes(Model model){
         model.addAttribute("pacientes",pacienteService.getAllPacientes());
         return "pacientes";
 
     }
 
-    @GetMapping("/pacientes/new")
+    @GetMapping("/paciente/new")
     public String createPacienteForm(Model model){
 
         Paciente paciente = new Paciente();
@@ -35,19 +35,19 @@ public class PacienteController {
         return "crear_paciente";
     }
 
-    @PostMapping("/pacientes")
+    @PostMapping("/paciente")
     public String savePaciente(@ModelAttribute("paciente") Paciente paciente){
         pacienteService.savePaciente(paciente);
-        return "redirect:/pacientes";
+        return "redirect:/paciente";
     }
 
-    @GetMapping("/pacientes/edit/{id}")
+    @GetMapping("/paciente/edit/{id}")
     public String editPacienteForm(@PathVariable Long id, Model model){
         model.addAttribute("paciente",pacienteService.getPacienteById(id));
         return "edit_paciente";
     }
 
-    @PostMapping("/pacientes/{id}")
+    @PostMapping("/paciente/{id}")
     public String updatePaciente(@PathVariable Long id,
                                 @ModelAttribute("paciente") Paciente paciente,
                                 Model model) {
@@ -70,12 +70,12 @@ public class PacienteController {
 
 
         pacienteService.updatePaciente(existingPaciente);
-        return "redirect:/pacientes";
+        return "redirect:/paciente";
     }
 
-    @GetMapping("/pacientes/{id}")
+    @GetMapping("/paciente/{id}")
     public String DeletePaciente (@PathVariable Long id) {
         pacienteService.deletePacientebyId(id);
-        return "redirect:/pacientes";
+        return "redirect:/paciente";
     }
 }
