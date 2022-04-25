@@ -28,10 +28,13 @@ public class User {
 	
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	private String email;
 	
 	private String password;
+
+	@Column(name = "profesion")
+	private String profesion;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
@@ -47,13 +50,14 @@ public class User {
 		
 	}
 	
-	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+	public User(String firstName, String lastName, String email, String password, Collection<Role> roles, String profesion) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		this.profesion = profesion;
 	}
 	public Long getId() {
 		return id;
@@ -91,5 +95,10 @@ public class User {
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
-
+	public String getProfesion() {
+		return profesion;
+	}
+	public void setProfesion(String profesion) {
+		this.email = profesion;
+	}
 }

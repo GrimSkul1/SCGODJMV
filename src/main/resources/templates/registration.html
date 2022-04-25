@@ -66,6 +66,14 @@
 					</div>
 
 					<div class="form-group">
+						<label class="control-label" for="profesion"> Profesion </label>
+						<select id="profesion" class="form-control"  th:field="*{profesion}">
+							<option th:value="'Doctor'" th:text="Doctor"></option>
+							<option th:value="'Secretaria'" th:text="Secretaria"></option>
+						</select>
+					</div>
+
+					<div class="form-group">
 						<button type="submit" class="btn btn-success">Registrar</button>
 						<span>Ya tiene una cuenta? <a href="/" th:href="@{/login}">Login Aqui
 								</a></span>
