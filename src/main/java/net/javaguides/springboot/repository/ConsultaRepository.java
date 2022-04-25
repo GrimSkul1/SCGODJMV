@@ -1,0 +1,18 @@
+package net.javaguides.springboot.repository;
+
+import net.javaguides.springboot.model.Consulta;
+import net.javaguides.springboot.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
+
+    Consulta getConsultaByIdCita(long idCita);
+    List<Consulta> getConsultasByIdDoctor(long idDoctor);
+    List<Consulta> getConsultasByIdPaciente(long idDoctor);
+
+
+}
