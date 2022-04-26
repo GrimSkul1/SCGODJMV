@@ -52,7 +52,7 @@
         <div class = "container">
             <div class = "row">
                 <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-                    <h1 class = "text-center"> Registrar consulta </h1>
+                    <h1 class = "text-center"> Hacer Nueva Cita </h1>
                     <div class = "card-body">
                         <form th:action="@{/consultas/registrar}" th:object = "${consulta}" method="POST">
                             <div class ="form-group">
@@ -104,21 +104,22 @@
                                         name = "description"
                                         th:field = "*{observaciones}"
                                         class = "form-control"
-                                        placeholder="Introduzca las observaciones realizadas"
+                                        placeholder="Introduzca la razon de la cita"
                                 ></textarea>
                             </div>
 
                             <div class ="form-group">
                                 <label> Procedimientos </label>
                                 <select class="form-select" multiple="multiple" th:name="procedimientos">
-                                    <option th:each="procedimiento : ${procedimientos}" th:value="${procedimiento.id}" th:text="${procedimiento.nombre}">1</option>
+                                    <option th:each="procedimiento : ${procedimientos}" th:value="${procedimiento.id}" th:text="${procedimiento.nombre}" >1</option>
                                 </select>
                             </div>
 
                             <div class ="form-group">
                                 <label> Enfermedades </label>
                                 <select class="form-select" multiple="multiple" th:name="enfermedades">
-                                    <option th:each="enfermedad : ${enfermedades}" th:value="${enfermedad.icd}" th:text="${enfermedad.nombre}">1</option>
+                                    <option th:each="enfermedad : ${enfermedades}"
+                                            th:value="${enfermedad.icd}" th:text="${enfermedad.nombre}"></option>
                                 </select>
                             </div>
 
@@ -128,7 +129,7 @@
                                         name = "description"
                                         th:field = "*{diagnostico}"
                                         class = "form-control"
-                                        placeholder="Introduzca el diagnostico"
+                                        placeholder="Introduzca la razon de la cita"
                                 ></textarea>
                             </div>
 

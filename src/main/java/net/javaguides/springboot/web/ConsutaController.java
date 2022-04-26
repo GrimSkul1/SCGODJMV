@@ -106,7 +106,8 @@ public class ConsutaController {
         String[] enfermedades =  request.getParameterValues("enfermedades");
 
         consulta.setProcedimientos(getProcedimientos(procedimientos));
-        consulta.setCost(calcularCostos(consulta.getProcedimientos(enfermedades)));
+        consulta.setCost(calcularCostos(consulta.getProcedimientos()));
+        consulta.setEnfermedades(getEnfermedades(enfermedades));
 
         consultaService.saveConsulta(consulta);
         return "redirect:/consultas";
@@ -114,6 +115,12 @@ public class ConsutaController {
 
     @GetMapping("/consultas/edit/{id}")
     public String editarConsulta(@PathVariable long id, Model model){
+        List<Procedures> procedures = procedureService.getAllProcedures();
+        List<Enfermedad> enfermedades = enfermedadService.getAllEnfermedades();
+
+        model.addAttribute("procedimientos",procedures);
+        model.addAttribute("enfermedades",enfermedades);
+
         model.addAttribute("consulta",consultaService.getConsultaById(id));
         return "editConsulta";
     }

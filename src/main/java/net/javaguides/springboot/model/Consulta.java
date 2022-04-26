@@ -134,11 +134,19 @@ public class Consulta {
         this.diagnostico = diagnostico;
     }
 
-    public List<Procedures> getProcedimientos(String[] enfermedades) {
+    public void setProcedimientos(List<Procedures> procedimientos) {
+        this.procedimientos = procedimientos;
+    }
+
+    public List<Procedures> getProcedimientos() {
         return procedimientos;
     }
 
-    public void setProcedimientos(List<Procedures> procedimientos) {
-        this.procedimientos = procedimientos;
+    public List<Enfermedad> getEnfermedades() {
+        return enfermedades;
+    }
+
+    public void setEnfermedades(List<Enfermedad> enfermedades) {
+        this.enfermedades = enfermedades;
     }
 }
