@@ -8,11 +8,8 @@ import net.javaguides.springboot.service.ProcedureService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDate;
@@ -50,17 +47,11 @@ public class ConsutaController {
         return "consultas";
     }
 
-    @GetMapping("/consultas/paciente/{id}")
-    public String listConsultasPorPaciente(Model model,@PathVariable Long id){
-        if (id != null) {
-            List<Consulta> consultas = consultaService.getConsultasByIdPaciente(id);
-            model.addAttribute("consultas", consultas);
-
-        }else {
-            List<Consulta> consultas = consultaService.getConsultasByIdDoctor(getUserId());
-            model.addAttribute("consultas", consultas);
-            model.addAttribute("error","No existen consultas para dicho paciente");
-        }
+    @PostMapping("/consultas/paciente")
+    public String listConsultasPorPaciente(Model model, WebRequest request){
+        long id = Long.parseLong(request.getParameter("id"));
+        List<Consulta> consultas = consultaService.getConsultasByIdPaciente(id);
+        model.addAttribute("consultas", consultas);
 
         return "consultas";
     }
@@ -69,7 +60,6 @@ public class ConsutaController {
     public String crearConsultaDesdeCero(Model model){
         Consulta consulta = new Consulta();
         consulta.setIdCita(0);
-        prueba();
         List<Procedures> procedures = procedureService.getAllProcedures();
         List<Enfermedad> enfermedades = enfermedadService.getAllEnfermedades();
         model.addAttribute("procedimientos",procedures);
@@ -146,16 +136,6 @@ public class ConsutaController {
 
         return "redirect:/consultas";
 
-    }
-
-    private void prueba(){
-        for (int i = 0; i < 10; i++){
-            Enfermedad aux = new Enfermedad(i,"Enfermedad" + i);
-            enfermedadService.saveEnfermedad(aux);
-
-            Procedures pros = new Procedures(i,"Procedimiento" + i,i * 5);
-            procedureService.saveProcedure(pros);
-        }
     }
     private List<Procedures> getProcedimientos(String[] procedimientos) {
         List<Procedures> procedures = new ArrayList<Procedures>();
