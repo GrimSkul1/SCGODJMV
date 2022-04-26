@@ -36,7 +36,7 @@
                     <a href="#" th:href="@{/consultas}">Consultas</a>
                 </li>
                 <li th:classappend="${module == 'procedimiento' ? 'active' : ''}">
-                    <a href="#" th:href="@{/task}">Procedimientos</a>
+                    <a href="#" th:href="@{/procedimiento}">Procedimientos</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -163,38 +163,6 @@
                         />
                     </div>
 
-                    <div class ="form-group">
-                        <label> Estado Civil </label>
-                        <input
-                                type = "text"
-                                name = "estadoCivil"
-                                th:field = "*{estadoCivil}"
-                                class = "form-control"
-                                placeholder="Introduzca el estado civil de Paciente"
-                        />
-                    </div>
-
-                    <div class ="form-group">
-                        <label> Profesion </label>
-                        <input
-                                type = "text"
-                                name = "profesion"
-                                th:field = "*{profesion}"
-                                class = "form-control"
-                                placeholder="Introduzca la profesion de Paciente"
-                        />
-                    </div>
-
-                    <div class ="form-group">
-                        <label> Nacionalidad </label>
-                        <input
-                                type = "text"
-                                name = "nacionalidad"
-                                th:field = "*{nacionalidad}"
-                                class = "form-control"
-                                placeholder="Introduzca la nacionalidad de Paciente"
-                        />
-                    </div>
 
                     <div class = "box-footer">
                         <button type="submit" class = "btn btn-primary">

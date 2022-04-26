@@ -52,64 +52,37 @@
         <div class = "container">
             <div class = "row">
                 <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-                    <h1 class = "text-center"> Hacer Nueva Cita </h1>
+                    <h1 class = "text-center"> Agregar Procedimiento </h1>
                     <div class = "card-body">
-                        <form th:action="@{/citas/{id} (id=${cita.id})}" th:object = "${cita}" method="POST">
-                            <div class ="form-group">
-                                <label> Paciente </label>
-                                <input
-                                        type = "number"
-                                        name = "patient"
-                                        th:field = "*{pacientID}"
-                                        class = "form-control"
-                                        placeholder="Introduzca el CODIGO del Paciente"
-                                />
-                            </div>
+                        <form th:action="@{/procedimiento}" th:object = "${procedimiento}" method="POST">
 
-                            <div class ="form-group">
-                                <label> Doctor </label>
-                                <input
-                                        type = "number"
-                                        name = "doctor"
-                                        th:field = "*{doctorID}"
-                                        class = "form-control"
-                                        placeholder="Introduzca el CODIGO del Doctor"
-                                />
-                            </div>
 
                             <div class ="form-group">
                                 <label> Description </label>
                                 <textarea
                                         name = "description"
-                                        th:field = "*{description}"
+                                        th:field = "*{nombre}"
                                         class = "form-control"
                                         placeholder="Introduzca la razon de la cita"
                                 ></textarea>
                             </div>
 
                             <div class ="form-group">
-                                <label> Fecha </label>
+                                <label> Costo </label>
                                 <input
-                                        type = "date"
-                                        name = "date"
-                                        th:field = "*{date}"
-                                        class = "form-control"
-                                />
-                            </div>
-
-                            <div class ="form-group">
-                                <label> Hora </label>
-                                <input
-                                        type = "time"
-                                        name = "time"
-                                        th:field = "*{time}"
-                                        class = "form-control"
-                                />
+                                        type="number"
+                                        name="currency-field"
+                                        id="currency-field"
+                                        pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                                        value=""
+                                        th:field = "*{costo}"
+                                        data-type="currency"
+                                        placeholder="$1,000.00">
                             </div>
 
                             <div class = "box-footer">
                                 <button type="submit" class = "btn btn-primary">
-                                    Editar
+                                    Agregar
                                 </button>
                             </div>
                         </form>

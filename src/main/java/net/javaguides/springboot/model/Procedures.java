@@ -21,8 +21,8 @@ public class Procedures {
     public Procedures() {
     }
 
-    public Procedures(long ICD, String nombre, float costo) {
-        this.id = ICD;
+    public Procedures(long id, String nombre, float costo) {
+        this.id = id;
         this.nombre = nombre;
         this.costo = costo;
     }
@@ -31,8 +31,8 @@ public class Procedures {
         return id;
     }
 
-    public void setICD(long ICD) {
-        this.id = ICD;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNombre() {

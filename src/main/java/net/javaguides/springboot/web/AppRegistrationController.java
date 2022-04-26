@@ -58,12 +58,12 @@ public class AppRegistrationController {
         existingAppointment.setTime(appointment.getTime());
         existingAppointment.setDescription(appointment.getDescription());
 
-        // save updated student object
+        // save updated appointment object
         appointmentService.updateAppointment(existingAppointment);
         return "redirect:/citas";
     }
 
-    // handler method to handle delete student request
+    // handler method to handle delete appointment request
 
     @GetMapping("/citas/{id}")
     public String deleteAppointment(@PathVariable Long id) {
