@@ -37,7 +37,7 @@
                     <a href="#" th:href="@{/citas}">Citas</a>
                 </li>
                 <li th:classappend="${module == 'consultas' ? 'active' : ''}">
-                    <a href="#" th:href="@{/task}">Consultas</a>
+                    <a href="#" th:href="@{/consultas}">Consultas</a>
                 </li>
                 <li th:classappend="${module == 'procedimiento' ? 'active' : ''}">
                     <a href="#" th:href="@{/task}">Procedimientos</a>
@@ -81,6 +81,10 @@
                 <td th:text = "${cita.date}"></td>
                 <td th:text = "${cita.time}"></td>
                 <td>
+
+                    <a th:href="@{/consultas/registrar/{id}(id=${cita.id})}"
+                       class="btn btn-success">Registrar Consulta</a>
+
                     <a th:href = "@{/citas/edit/{id}(id=${cita.id})}"
                        class = "btn btn-primary">Actualizar</a>
 

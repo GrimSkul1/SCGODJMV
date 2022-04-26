@@ -1,8 +1,6 @@
 package net.javaguides.springboot.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="procedures")
@@ -10,25 +8,31 @@ import javax.persistence.Table;
 public class Procedures {
 
     @Id
-    private String ICD;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private long id;
+
+    @Column(name = "nombre")
     private String nombre;
+
+    @Column(name = "costo")
     private float costo;
 
     public Procedures() {
     }
 
-    public Procedures(String ICD, String nombre, float costo) {
-        this.ICD = ICD;
+    public Procedures(long ICD, String nombre, float costo) {
+        this.id = ICD;
         this.nombre = nombre;
         this.costo = costo;
     }
 
-    public String getICD() {
-        return ICD;
+    public long getId() {
+        return id;
     }
 
-    public void setICD(String ICD) {
-        this.ICD = ICD;
+    public void setICD(long ICD) {
+        this.id = ICD;
     }
 
     public String getNombre() {

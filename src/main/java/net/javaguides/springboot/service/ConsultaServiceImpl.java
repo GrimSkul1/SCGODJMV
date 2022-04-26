@@ -2,8 +2,10 @@ package net.javaguides.springboot.service;
 
 import net.javaguides.springboot.model.Consulta;
 import net.javaguides.springboot.repository.ConsultaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
 
 public class ConsultaServiceImpl implements ConsultaService{
 

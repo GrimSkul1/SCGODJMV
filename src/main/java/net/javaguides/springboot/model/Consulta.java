@@ -5,7 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,10 +24,6 @@ public class Consulta {
 
     @Column(name = "idPaciente")
     private long idPaciente;
-
-    @Column(name = "tipo")
-    private String tipo;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private LocalDate date;
@@ -49,17 +44,20 @@ public class Consulta {
     @ManyToMany
     private List<Procedures> procedimientos;
 
-    public Consulta(long idCita, long idDoctor, long idPaciente, String tipo, LocalDate date, LocalTime time, float costo, String observaciones, String diagnostico, List<Procedures> procedimientos) {
+    @ManyToMany
+    private List<Enfermedad> enfermedades;
+
+    public Consulta(long idCita, long idDoctor, long idPaciente, LocalDate date, LocalTime time, float costo, String observaciones, String diagnostico, List<Procedures> procedimientos, List<Enfermedad> enfermedades) {
         this.idCita = idCita;
         this.idDoctor = idDoctor;
         this.idPaciente = idPaciente;
-        this.tipo = tipo;
         this.date = date;
         this.time = time;
         this.cost = costo;
         this.observaciones = observaciones;
         this.diagnostico = diagnostico;
         this.procedimientos = procedimientos;
+        this.enfermedades = enfermedades;
     }
 
     public Consulta() {
@@ -96,15 +94,6 @@ public class Consulta {
     public void setIdPaciente(long idPaciente) {
         this.idPaciente = idPaciente;
     }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public LocalDate getDate() {
         return date;
     }
@@ -145,7 +134,7 @@ public class Consulta {
         this.diagnostico = diagnostico;
     }
 
-    public List<Procedures> getProcedimientos() {
+    public List<Procedures> getProcedimientos(String[] enfermedades) {
         return procedimientos;
     }
 

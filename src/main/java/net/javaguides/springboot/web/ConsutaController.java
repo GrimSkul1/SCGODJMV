@@ -1,12 +1,10 @@
 package net.javaguides.springboot.web;
 
-import net.javaguides.springboot.model.Appointment;
-import net.javaguides.springboot.model.Consulta;
-import net.javaguides.springboot.model.Procedures;
-import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.model.*;
 import net.javaguides.springboot.service.AppointmentService;
 import net.javaguides.springboot.service.ConsultaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.javaguides.springboot.service.EnfermedadService;
+import net.javaguides.springboot.service.ProcedureService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,22 +13,35 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.request.WebRequest;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 public class ConsutaController {
     private ConsultaService consultaService;
     private AppointmentService appointmentService;
+
+    private EnfermedadService enfermedadService;
+
+    private ProcedureService procedureService;
     private User usuarioActivo;
+
+    public ConsutaController(ConsultaService consultaService, AppointmentService appointmentService, EnfermedadService enfermedadService,ProcedureService procedureService) {
+        super();
+        this.consultaService = consultaService;
+        this.appointmentService = appointmentService;
+        this.enfermedadService = enfermedadService;
+        this.procedureService = procedureService;
+    }
+
     private long getUserId(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User)authentication.getPrincipal();
-        return user.getId();
+        authentication.getPrincipal();
+        System.out.println(authentication.getPrincipal());
+        return 1;
     }
     @GetMapping("/consultas")
     public String listConsultas(Model model){
@@ -57,6 +68,12 @@ public class ConsutaController {
     @GetMapping("/consultas/registrar/nueva")
     public String crearConsultaDesdeCero(Model model){
         Consulta consulta = new Consulta();
+        consulta.setIdCita(0);
+        prueba();
+        List<Procedures> procedures = procedureService.getAllProcedures();
+        List<Enfermedad> enfermedades = enfermedadService.getAllEnfermedades();
+        model.addAttribute("procedimientos",procedures);
+        model.addAttribute("enfermedades",enfermedades);
         model.addAttribute("consulta",consulta);
         return "registrarConsulta";
     }
@@ -68,19 +85,28 @@ public class ConsutaController {
         consulta.setIdCita(cita.getId());
         consulta.setIdPaciente(cita.getPacientID());
         consulta.setTime(cita.getTime());
+        consulta.setDate(cita.getDate());
         consulta.setIdDoctor(cita.getDoctorID());
+        List<Procedures> procedures = procedureService.getAllProcedures();
+        List<Enfermedad> enfermedades = enfermedadService.getAllEnfermedades();
 
+        model.addAttribute("procedimientos",procedures);
+        model.addAttribute("enfermedades",enfermedades);
         model.addAttribute("consulta",consulta);
+
         return "registrarConsulta";
     }
 
 
     @PostMapping("/consultas/registrar")
-    public String registraConsulta(@ModelAttribute("consulta") Consulta consulta){
+    public String registraConsulta(@ModelAttribute("consulta") Consulta consulta,WebRequest request){
         consulta.setIdDoctor(getUserId());
         consulta.setDate(LocalDate.now());
-        consulta.setProcedimientos(getProcedimientos(null));
-        consulta.setCost(calcularCostos(consulta.getProcedimientos()));
+        String[] procedimientos = request.getParameterValues("procedimientos");
+        String[] enfermedades =  request.getParameterValues("enfermedades");
+
+        consulta.setProcedimientos(getProcedimientos(procedimientos));
+        consulta.setCost(calcularCostos(consulta.getProcedimientos(enfermedades)));
 
         consultaService.saveConsulta(consulta);
         return "redirect:/consultas";
@@ -100,10 +126,35 @@ public class ConsutaController {
         return "redirect:/consultas";
     }
 
-    private List<Procedures> getProcedimientos(List<String> procedimientos) {
+    @GetMapping("/consultas/ver/{id}")
+    public String verConsulta(@PathVariable long id, Model model){
+        Consulta consulta = consultaService.getConsultaById(id);
+        model.addAttribute("consulta",consulta);
+        return "verConsulta";
+    }
+
+    @GetMapping("/consultas/eliminar/{id}")
+    public String eliminarConsulta(@PathVariable long id){
+        consultaService.deleteConsultaById(id);
+
+        return "redirect:/consultas";
+
+    }
+
+    private void prueba(){
+        for (int i = 0; i < 10; i++){
+            Enfermedad aux = new Enfermedad(i,"Enfermedad" + i);
+            enfermedadService.saveEnfermedad(aux);
+
+            Procedures pros = new Procedures(i,"Procedimiento" + i,i * 5);
+            procedureService.saveProcedure(pros);
+        }
+    }
+    private List<Procedures> getProcedimientos(String[] procedimientos) {
         List<Procedures> procedures = new ArrayList<Procedures>();
         for (String procedimiento:procedimientos) {
-            //Buscar el procedimiento usando el servicio y agregarlo a procedures
+            long id = Long.parseLong(procedimiento);
+            procedures.add(procedureService.getProcedureById(id));
         }
         return procedures;
     }
@@ -114,5 +165,14 @@ public class ConsutaController {
             total += procedimiento.getCosto();
         }
         return total;
+    }
+
+    private List<Enfermedad> getEnfermedades(String[] enfermedades) {
+        List<Enfermedad> enfermedads = new ArrayList<Enfermedad>();
+        for (String procedimiento:enfermedades) {
+            long id = Long.parseLong(procedimiento);
+            enfermedads.add(enfermedadService.getEnfermedadByIcd(id));
+        }
+        return enfermedads;
     }
 }
