@@ -55,84 +55,28 @@
         <div class = "container">
             <div class = "row">
                 <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-                    <h1 class = "text-center"> Hacer Nueva Cita </h1>
+                    <h1 class = "text-center"> Agregar Procedimiento </h1>
                     <div class = "card-body">
-                        <form th:action="@{/consultas/registrar}" th:object = "${consulta}" method="POST">
-                            <div class ="form-group">
-                                <label> Paciente </label>
-                                <input
-                                        type = "number"
-                                        name = "patient"
-                                        th:field = "*{idPaciente}"
-                                        class = "form-control"
-                                        placeholder="Introduzca el CODIGO del Paciente"
-                                />
-                            </div>
-
-                            <div class ="form-group">
-                                <label> Doctor </label>
-                                <input
-                                        type = "number"
-                                        name = "doctor"
-                                        th:field = "*{idDoctor}"
-                                        class = "form-control"
-                                        placeholder="Introduzca el CODIGO del Doctor"
-                                />
-                            </div>
+                        <form th:action="@{/enfermedad}" th:object = "${enfermedades}" method="POST">
 
 
                             <div class ="form-group">
-                                <label> Fecha </label>
-                                <input
-                                        type = "date"
-                                        name = "date"
-                                        th:value = "*{date}"
-                                        class = "form-control"
-                                />
-                            </div>
-
-                            <div class ="form-group">
-                                <label> Hora </label>
-                                <input
-                                        type = "time"
-                                        name = "time"
-                                        th:field = "*{time}"
-                                        class = "form-control"
-                                />
-                            </div>
-
-                            <div class ="form-group">
-                                <label> Observaciones </label>
+                                <label> ICD </label>
                                 <textarea
                                         name = "description"
-                                        th:field = "*{observaciones}"
+                                        th:field = "*{icd}"
                                         class = "form-control"
-                                        placeholder="Introduzca la razon de la cita"
+                                        placeholder="Introduzca el codigo ICD"
                                 ></textarea>
                             </div>
 
                             <div class ="form-group">
-                                <label> Procedimientos </label>
-                                <select class="form-select" multiple="multiple" th:name="procedimientos">
-                                    <option th:each="procedimiento : ${procedimientos}" th:value="${procedimiento.id}" th:text="${procedimiento.nombre}" >1</option>
-                                </select>
-                            </div>
-
-                            <div class ="form-group">
-                                <label> Enfermedades </label>
-                                <select class="form-select" multiple="multiple" th:name="enfermedades">
-                                    <option th:each="enfermedad : ${enfermedades}"
-                                            th:value="${enfermedad.icd}" th:text="${enfermedad.nombre}"></option>
-                                </select>
-                            </div>
-
-                            <div class ="form-group">
-                                <label>Diagnostico </label>
+                                <label> Nombre </label>
                                 <textarea
                                         name = "description"
-                                        th:field = "*{diagnostico}"
+                                        th:field = "*{nombre}"
                                         class = "form-control"
-                                        placeholder="Introduzca la razon de la cita"
+                                        placeholder="Introduzca el nombre de la enfermedad"
                                 ></textarea>
                             </div>
 

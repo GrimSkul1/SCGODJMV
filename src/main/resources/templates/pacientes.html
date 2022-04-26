@@ -38,6 +38,9 @@
                 <li th:classappend="${module == 'procedimiento' ? 'active' : ''}">
                     <a href="#" th:href="@{/procedimiento}">Procedimientos</a>
                 </li>
+                <li th:classappend="${module == 'enfermedad' ? 'active' : ''}">
+                    <a href="#" th:href="@{/enfermedad}">Enfermedades</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
@@ -71,9 +74,6 @@
             <th> Fecha de Nacimiento</th>
             <th> Nombre Contacto </th>
             <th> Numero Contacto</th>
-            <th> Estado Civil</th>
-            <th> Profesion </th>
-            <th> Nacionalidad</th>
             <th> Opciones </th>
         </tr>
         </thead>
@@ -91,9 +91,6 @@
             <td th:text = "${paciente.fechaNacimiento}"></td>
             <td th:text = "${paciente.nombreContacto}"></td>
             <td th:text = "${paciente.numeroContacto}"></td>
-            <td th:text = "${paciente.estadoCivil}"></td>
-            <td th:text = "${paciente.profesion}"></td>
-            <td th:text = "${paciente.nacionalidad}"></td>
 
             <td>
                 <a th:href = "@{/paciente/edit/{id}(id=${paciente.id})}"

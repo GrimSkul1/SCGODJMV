@@ -38,6 +38,9 @@
                 <li th:classappend="${module == 'procedimiento' ? 'active' : ''}">
                     <a href="#" th:href="@{/procedimiento}">Procedimientos</a>
                 </li>
+                <li th:classappend="${module == 'enfermedad' ? 'active' : ''}">
+                    <a href="#" th:href="@{/enfermedad}">Enfermedades</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
@@ -63,7 +66,7 @@
                                         name = "description"
                                         th:field = "*{nombre}"
                                         class = "form-control"
-                                        placeholder="Introduzca la razon de la cita"
+                                        placeholder="Introduzca el nombre del procedimiento"
                                 ></textarea>
                             </div>
 
